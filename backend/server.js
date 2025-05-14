@@ -17,6 +17,7 @@ app.use(bodyParser.json());
 app.use("/api/problems", require("./routes/problems"));
 app.use("/api/testcases", require("./routes/testcases"));
 app.use("/api/submit", require("./routes/submit"));
+app.use("/api/judge0", require("./routes/judge0"));
 
 // Root endpoint
 app.get("/", (req, res) => {
