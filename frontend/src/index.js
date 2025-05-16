@@ -1,11 +1,13 @@
-import React from "react";
-import ReactDOM from "react-dom/client"; // Use ReactDOM from "react-dom/client" for React 18+
-import App from "./App";
-import "./App.css";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './App';
+import AuthProvider from './context/AuthContext'; // Import AuthProvider to wrap the App
 
-const root = ReactDOM.createRoot(document.getElementById("root")); // Create a root
-root.render(
+ReactDOM.render(
   <React.StrictMode>
-    <App />
-  </React.StrictMode>
+    <AuthProvider>
+      <App />
+    </AuthProvider>
+  </React.StrictMode>,
+  document.getElementById('root')
 );

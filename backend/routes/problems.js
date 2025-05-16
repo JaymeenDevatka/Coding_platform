@@ -1,18 +1,18 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
 const {
   getProblems,
-  getProblemById,
-  createProblem,
-  updateProblem,
-  deleteProblem,
-} = require("../controllers/problems");
+  getProblemByIdHandler,
+  createProblemHandler,
+  updateProblemHandler,
+  deleteProblemHandler,
+} = require('../controllers/problems');
 
-// Define routes for problems
-router.get("/", getProblems);
-router.get("/:id", getProblemById);
-router.post("/", createProblem);
-router.put("/:id", updateProblem);
-router.delete("/:id", deleteProblem);
+// Routes for problems
+router.get('/', getProblems);
+router.get('/:id', getProblemByIdHandler);
+router.post('/', createProblemHandler);
+router.put('/:id', updateProblemHandler);
+router.delete('/:id', deleteProblemHandler);
 
 module.exports = router;

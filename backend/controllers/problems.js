@@ -4,7 +4,7 @@ const {
   createProblem,
   updateProblem,
   deleteProblem,
-} = require("../models/problems");
+} = require('../models/problems');
 
 // Get all problems
 const getProblems = async (req, res) => {
@@ -55,7 +55,7 @@ const deleteProblemHandler = async (req, res) => {
   const { id } = req.params;
   try {
     await deleteProblem(id);
-    res.json({ message: "Problem deleted successfully!" });
+    res.json({ message: 'Problem deleted successfully!' });
   } catch (err) {
     res.status(500).send(err.message);
   }

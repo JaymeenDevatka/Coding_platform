@@ -1,38 +1,38 @@
-const pool = require("../config/db");
+const pool = require('../config/db');
 
 // Get all problems
 const getAllProblems = async () => {
-  const result = await pool.query("SELECT * FROM problems");
-  return result.rows;
+  const [rows] = await pool.query('SELECT * FROM problems');
+  return rows;
 };
 
-// Get problem by ID
+// Get a problem by ID
 const getProblemById = async (id) => {
-  const result = await pool.query("SELECT * FROM problems WHERE id = $1", [id]);
-  return result.rows[0];
+  const [rows] = await pool.query('SELECT * FROM problems WHERE id = ?', [id]);
+  return rows[0];
 };
 
-// Create a new problem
+// Create a problem
 const createProblem = async (title, description, difficulty, total_points) => {
-  const result = await pool.query(
-    "INSERT INTO problems (title, description, difficulty, total_points) VALUES ($1, $2, $3, $4) RETURNING *",
+  const [result] = await pool.query(
+    'INSERT INTO problems (title, description, difficulty, total_points) VALUES (?, ?, ?, ?)',
     [title, description, difficulty, total_points]
   );
-  return result.rows[0];
+  return { id: result.insertId, title, description, difficulty, total_points };
 };
 
-// Update an existing problem
+// Update a problem
 const updateProblem = async (id, title, description, difficulty, total_points) => {
-  const result = await pool.query(
-    "UPDATE problems SET title = $1, description = $2, difficulty = $3, total_points = $4 WHERE id = $5 RETURNING *",
+  await pool.query(
+    'UPDATE problems SET title = ?, description = ?, difficulty = ?, total_points = ? WHERE id = ?',
     [title, description, difficulty, total_points, id]
   );
-  return result.rows[0];
+  return { id, title, description, difficulty, total_points };
 };
 
 // Delete a problem
 const deleteProblem = async (id) => {
-  await pool.query("DELETE FROM problems WHERE id = $1", [id]);
+  await pool.query('DELETE FROM problems WHERE id = ?', [id]);
 };
 
 module.exports = {
