@@ -1,5 +1,4 @@
 const express = require('express');
-const router = express.Router();
 const {
   getProblems,
   getProblemByIdHandler,
@@ -8,7 +7,8 @@ const {
   deleteProblemHandler,
 } = require('../controllers/problems');
 
-// Routes for problems
+const router = express.Router();
+
 router.get('/', getProblems);
 router.get('/:id', getProblemByIdHandler);
 router.post('/', createProblemHandler);

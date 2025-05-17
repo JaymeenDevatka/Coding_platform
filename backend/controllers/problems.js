@@ -6,7 +6,6 @@ const {
   deleteProblem,
 } = require('../models/problems');
 
-// Get all problems
 const getProblems = async (req, res) => {
   try {
     const problems = await getAllProblems();
@@ -16,29 +15,29 @@ const getProblems = async (req, res) => {
   }
 };
 
-// Get problem by ID
 const getProblemByIdHandler = async (req, res) => {
   const { id } = req.params;
   try {
     const problem = await getProblemById(id);
+    if (!problem) {
+      return res.status(404).json({ message: 'Problem not found' });
+    }
     res.json(problem);
   } catch (err) {
     res.status(500).send(err.message);
   }
 };
 
-// Create a new problem
 const createProblemHandler = async (req, res) => {
   const { title, description, difficulty, total_points } = req.body;
   try {
     const problem = await createProblem(title, description, difficulty, total_points);
-    res.json(problem);
+    res.status(201).json(problem);
   } catch (err) {
     res.status(500).send(err.message);
   }
 };
 
-// Update an existing problem
 const updateProblemHandler = async (req, res) => {
   const { id } = req.params;
   const { title, description, difficulty, total_points } = req.body;
@@ -50,7 +49,6 @@ const updateProblemHandler = async (req, res) => {
   }
 };
 
-// Delete a problem
 const deleteProblemHandler = async (req, res) => {
   const { id } = req.params;
   try {
