@@ -1,27 +1,28 @@
-import axios from "axios";
+import axios from 'axios';
 
-const API_URL = "/api/problems"; // Use proxy in package.json or adjust as needed
+const API_URL = process.env.REACT_APP_BACKEND_URL;
 
 export const getProblems = async () => {
-  const res = await axios.get(API_URL);
-  return res.data;
+  const response = await axios.get(`${API_URL}/api/problems`);
+  return response.data;
 };
 
 export const getProblemById = async (id) => {
-  const res = await axios.get(`${API_URL}/${id}`);
-  return res.data;
+  const response = await axios.get(`${API_URL}/api/problems/${id}`);
+  return response.data;
 };
 
 export const createProblem = async (problem) => {
-  const res = await axios.post(API_URL, problem);
-  return res.data;
+  const response = await axios.post(`${API_URL}/api/problems`, problem);
+  return response.data;
 };
 
 export const updateProblem = async (id, problem) => {
-  const res = await axios.put(`${API_URL}/${id}`, problem);
-  return res.data;
+  const response = await axios.put(`${API_URL}/api/problems/${id}`, problem);
+  return response.data;
 };
 
 export const deleteProblem = async (id) => {
-  await axios.delete(`${API_URL}/${id}`);
+  const response = await axios.delete(`${API_URL}/api/problems/${id}`);
+  return response.data;
 };

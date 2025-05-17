@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getTestcases, createTestcase, deleteTestcase } from '../api/testcases';
-import {
-  Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, TextField,
-} from '@mui/material';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, TextField, Box } from '@mui/material';
 
 const Testcases = () => {
   const { problemId } = useParams();
@@ -35,34 +33,38 @@ const Testcases = () => {
   };
 
   return (
-    <TableContainer component={Paper} sx={{ marginTop: 2 }}>
-      <Table>
-        <TableHead>
-          <TableRow>
-            <TableCell>Input</TableCell>
-            <TableCell>Output</TableCell>
-            <TableCell>Difficulty</TableCell>
-            <TableCell>Points</TableCell>
-            <TableCell>Actions</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {testcases.map((testcase) => (
-            <TableRow key={testcase.id}>
-              <TableCell>{testcase.input}</TableCell>
-              <TableCell>{testcase.output}</TableCell>
-              <TableCell>{testcase.difficulty}</TableCell>
-              <TableCell>{testcase.points}</TableCell>
-              <TableCell>
-                <Button variant="contained" color="secondary" onClick={() => handleDeleteTestcase(testcase.id)}>
-                  Delete
-                </Button>
-              </TableCell>
+    <Box>
+      <h1>Manage Test Cases</h1>
+      <TableContainer component={Paper}>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>Input</TableCell>
+              <TableCell>Output</TableCell>
+              <TableCell>Difficulty</TableCell>
+              <TableCell>Points</TableCell>
+              <TableCell>Actions</TableCell>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-      <div style={{ marginTop: 20 }}>
+          </TableHead>
+          <TableBody>
+            {testcases.map((testcase) => (
+              <TableRow key={testcase.id}>
+                <TableCell>{testcase.input}</TableCell>
+                <TableCell>{testcase.output}</TableCell>
+                <TableCell>{testcase.difficulty}</TableCell>
+                <TableCell>{testcase.points}</TableCell>
+                <TableCell>
+                  <Button variant="contained" color="secondary" onClick={() => handleDeleteTestcase(testcase.id)}>
+                    Delete
+                  </Button>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+      <Box sx={{ mt: 4 }}>
+        <h2>Add New Test Case</h2>
         <TextField
           label="Input"
           value={newTestcase.input}
@@ -91,8 +93,8 @@ const Testcases = () => {
         <Button variant="contained" color="primary" onClick={handleAddTestcase}>
           Add Testcase
         </Button>
-      </div>
-    </TableContainer>
+      </Box>
+    </Box>
   );
 };
 

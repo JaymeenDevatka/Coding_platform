@@ -1,25 +1,32 @@
 import React from 'react';
-import { Container, Typography, Button } from '@mui/material';
+import { Box, Typography, Button } from '@mui/material';
 import { Link } from 'react-router-dom';
 
-const HomePage = () => (
-  <Container maxWidth="md" sx={{ mt: 4 }}>
-    <Typography variant="h3" gutterBottom>
-      Welcome to the Coding Platform!
-    </Typography>
-    <Typography variant="h6" color="textSecondary" paragraph>
-      Practice coding problems, create your own, and improve your skills.
-    </Typography>
-    <Button
-      variant="contained"
-      color="primary"
-      component={Link}
-      to="/problems"
-      size="large"
+const HomePage = () => {
+  return (
+    <Box
+      sx={{
+        textAlign: 'center',
+        py: 5,
+      }}
     >
-      View Problems
-    </Button>
-  </Container>
-);
+      <Typography variant="h3" gutterBottom>
+        Welcome to the Coding Platform
+      </Typography>
+      <Typography variant="h6" color="textSecondary" gutterBottom>
+        Solve problems, manage test cases, and submit your code.
+      </Typography>
+      <Button
+        variant="contained"
+        color="primary"
+        component={Link}
+        to="/problems"
+        sx={{ mt: 3 }}
+      >
+        Get Started
+      </Button>
+    </Box>
+  );
+};
 
 export default HomePage;
